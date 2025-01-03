@@ -17,3 +17,7 @@ Replaces `cat` with `bat`. To run the normal `cat` command, use `rcat`. Also ena
 ### Requirements
 
 Just requires [bat](https://github.com/sharkdp/bat)!
+
+### License
+
+[MIT](../LICENSE)
