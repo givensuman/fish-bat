@@ -4,7 +4,7 @@ A port of [fdellwing/zsh-bat](https://github.com/fdellwing/zsh-bat) for the Fish
 
 ### Installation
 
-Install with [fisher](https://github.com/jorgebucaran/fisher)
+Install with [fisher](https://github.com/jorgebucaran/fisher):
 
 ```shell
 fisher install givensuman/fish-bat
