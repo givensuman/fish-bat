@@ -17,9 +17,11 @@ function _fish_bat_install --on-event fish-bat_install
         set -gx MANPAGER sh\ -c\ \'col\ -bx\ \|\ bat\ -l\ map\ -p\'
         set -gx MANROFFOPT -c
 
-    else
+    else # `bat` command not found
         echo "bat is not installed but you're"
         echo "sourcing the fish plugin for it"
+
+        return 1
     end
 end
 
