@@ -6,7 +6,7 @@ function _fish_bat_install --on-event fish-bat_install
         alias cat="$(which batcat)"
 
         # Set manpager to use `bat`
-        set -gx MANPAGER sh\ -c\ \'col\ -bx\ \|\ batcat\ -l\ map\ -p\'
+        set -gx MANPAGER sh\ -c\ \'col\ -bx\ \|\ batcat\ -l\ man\ -p\'
         set -gx MANROFFOPT -c
 
     else if command -q bat # For all other systems
@@ -14,7 +14,7 @@ function _fish_bat_install --on-event fish-bat_install
         alias cat="$(which bat)"
 
         # Set manpager to use `bat`
-        set -gx MANPAGER sh\ -c\ \'col\ -bx\ \|\ bat\ -l\ map\ -p\'
+        set -gx MANPAGER sh\ -c\ \'col\ -bx\ \|\ bat\ -l\ man\ -p\'
         set -gx MANROFFOPT -c
 
     else # `bat` command not found
