@@ -9,6 +9,7 @@ function _fish_bat_install --on-event fish-bat_install
         set -gx MANPAGER sh\ -c\ \'col\ -bx\ \|\ batcat\ -l\ man\ -p\'
         set -gx MANROFFOPT -c
 
+        batcat cache --build
     else if command -q bat # For all other systems
         alias rcat="$(which cat)"
         alias cat="$(which bat)"
@@ -17,14 +18,13 @@ function _fish_bat_install --on-event fish-bat_install
         set -gx MANPAGER sh\ -c\ \'col\ -bx\ \|\ bat\ -l\ man\ -p\'
         set -gx MANROFFOPT -c
 
+        bat cache --build
     else # `bat` command not found
         echo "bat is not installed but you're"
         echo "sourcing the fish plugin for it"
 
         return 1
     end
-
-    bat cache --build
 end
 
 function _fish_bat_uninstall --on-event fish-bat_uninstall
