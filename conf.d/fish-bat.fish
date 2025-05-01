@@ -24,7 +24,7 @@ function _fish_bat_install --on-event fish-bat_install
         return 1
     end
 
-    bat cache --build
+    cat cache --build
 end
 
 function _fish_bat_uninstall --on-event fish-bat_uninstall
