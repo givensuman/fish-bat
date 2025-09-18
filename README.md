@@ -1,6 +1,6 @@
 # fish-bat
 
-A port of [fdellwing/zsh-bat](https://github.com/fdellwing/zsh-bat) for the Fish shell.
+A ~~port of [fdellwing/zsh-bat](https://github.com/fdellwing/zsh-bat)~~ bat plugin for the Fish shell.
 
 ### Installation
 
