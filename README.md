@@ -12,7 +12,7 @@ fisher install givensuman/fish-bat
 
 ### Usage
 
-Replaces `cat` with `bat`. To run the normal `cat` command, use `rcat`. Also enables syntax highlighting for the `man` command.
+Replaces `cat` with `bat`. To run the normal `cat` command, use `rcat`. Also enables syntax highlighting for the `man` command and any `--help` output!
 
 ### Requirements
 
