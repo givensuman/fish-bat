@@ -1,9 +1,9 @@
 function _fish_bat_install --on-event fish-bat_install
     # For Ubuntu/Debian systems where `bat` is installed as `batcat`
     if command -q batcat
-        set bat_cmd batcat
-    else if command -q bat
-        set bat_cmd bat
+        set bat_cmd $(which batcat)
+    else if command -q bat # For all other systems
+        set bat_cmd $(which bat)
     else # `bat` command not found
         echo "bat is not installed but you're"
         echo "sourcing the fish plugin for it"
@@ -16,8 +16,8 @@ function _fish_bat_install --on-event fish-bat_install
     alias --save cat="$(which $bat_cmd)"
 
     # Set manpager to use `bat`
-    set -gx MANPAGER sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | '$bat_cmd' -p -lman'
-    man 2 select
+    set -gx MANPAGER "sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | '$bat_cmd' -p -lman'"
+    set -gx MANROFFOPT -c
 
     # Colorize help messages
     abbr -a --position anywhere -- --help '--help | '$bat_cmd' -plhelp'
