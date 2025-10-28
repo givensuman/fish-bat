@@ -14,6 +14,12 @@ set -gx MANPAGER "sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x0
 set -gx MANROFFOPT -c
 
 function _fish_bat_install --on-event fish-bat_install
+    if command -q batcat
+        set bat_cmd (command -v batcat)
+    else if command -q bat # For all other systems
+        set bat_cmd (command -v bat)
+    end
+
     $bat_cmd cache --build
 end
 
