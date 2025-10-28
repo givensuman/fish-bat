@@ -13,10 +13,6 @@ alias cat $bat_cmd
 set -gx MANPAGER "sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | '$bat_cmd' -p -lman'"
 set -gx MANROFFOPT -c
 
-# Colorize help messages
-abbr -a --position anywhere -- --help '--help | '$bat_cmd' -plhelp'
-abbr -a --position anywhere -- -h '-h | '$bat_cmd' -plhelp'
-
 function _fish_bat_install --on-event fish-bat_install
     $bat_cmd cache --build
 end
@@ -27,9 +23,6 @@ function _fish_bat_uninstall --on-event fish-bat_uninstall
 
     set --erase MANPAGER
     set --erase MANROFFOPT
-
-    abbr --erase --help
-    abbr --erase -h
 end
 
 function _fish_bat_update --on-event fish-bat_update
