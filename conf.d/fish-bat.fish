@@ -3,6 +3,11 @@ if command -q batcat
     set bat_cmd (command -v batcat)
 else if command -q bat # For all other systems
     set bat_cmd (command -v bat)
+else
+    echo "bat is not installed but you're"
+    echo "sourcing the fish plugin for it"
+
+    return 1
 end
 
 # Replace `cat` with `bat`
