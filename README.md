@@ -1,6 +1,10 @@
+<div align="center">
+  <img alt="fish-bat" src="./assets/logo.png" width="200" />
+</div>
+
 # fish-bat
 
-A ~~port of [fdellwing/zsh-bat](https://github.com/fdellwing/zsh-bat)~~ bat plugin for the Fish shell.
+A ~~port of [fdellwing/zsh-bat](https://github.com/fdellwing/zsh-bat)~~ completely original bat plugin for the Fish shell.
 
 ### Installation
 
