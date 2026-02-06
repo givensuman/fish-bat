@@ -1,44 +1,51 @@
-# For Ubuntu/Debian systems where `bat` is installed as `batcat`
+# Detect bat command (batcat on Debian/Ubuntu, bat elsewhere)
+set -l cmd
 if command -q batcat
-    set bat_cmd (command -v batcat)
-else if command -q bat # For all other systems
-    set bat_cmd (command -v bat)
+    set cmd (command -v batcat)
+else if command -q bat
+    set cmd (command -v bat)
 else
     echo "bat is not installed but you're"
     echo "sourcing the fish plugin for it"
-
     return 1
 end
 
-# Replace `cat` with `bat`
-alias rcat (command -v cat)
-alias cat $bat_cmd
+if test "$TERM" = dumb
+    echo "you are sourcing the fish plugin for bat"
+    echo "in a dumb terminal, which won't support it"
+    return 1
+end
 
-# Set manpager to use `bat`
-set -gx MANPAGER "sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | '$bat_cmd' -p -lman'"
+if command -q cat
+    alias rcat (command -v cat)
+end
+alias cat $cmd
+
+# Configure bat as man page viewer with ANSI escape removal
+set -gx MANPAGER "sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | '$cmd' -p -lman'"
 set -gx MANROFFOPT -c
 
-# Colorize help text using `bat`
-abbr -a --position anywhere -- --help '--help | '$bat_cmd' -plhelp'
-abbr -a --position anywhere -- -h '-h | '$bat_cmd' -plhelp'
+# Pipe help output through bat with syntax highlighting
+abbr -a --position anywhere -- --help '--help | '$cmd' -plhelp'
+abbr -a --position anywhere -- -h '-h | '$cmd' -plhelp'
 
 function _fish_bat_install --on-event fish-bat_install
+    set -l cmd
     if command -q batcat
-        set bat_cmd (command -v batcat)
-    else if command -q bat # For all other systems
-        set bat_cmd (command -v bat)
+        set cmd (command -v batcat)
+    else if command -q bat
+        set cmd (command -v bat)
     end
 
-    $bat_cmd cache --build
+    $cmd cache --build
 end
 
 function _fish_bat_uninstall --on-event fish-bat_uninstall
     functions --erase rcat
     functions --erase cat
-
+    set --erase cmd
     set --erase MANPAGER
     set --erase MANROFFOPT
-
     abbr --erase -- --help
     abbr --erase -- -h
 end
